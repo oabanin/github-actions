@@ -5,9 +5,7 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "github.name - ${{ github.name }} "
-      - run: echo "github.run-name - ${{ github.run-name }} "
-      - run: echo "github - ${{ github }} "
+      - run: echo "github.workspace - ${{ github.workspace }} "
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
@@ -19,3 +17,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+
+      - name: Check tag
+        if: ${{ github.ref == 'pre-release-frontend' || github.ref == 'pre-release-frontend' }}
+        run: echo " RUN only if pre-release ${{ github.ref }}."
