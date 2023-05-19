@@ -19,11 +19,11 @@ jobs:
       - run: echo "${{ toJSON(github) }}"
 
       - name: Build return-portal
-        if: !contains('frontend', github.ref)
+        if: contains('frontend', github.ref)
         run: echo "Build return-portal ${{ github.ref }}."
 
       - name: Build application
-        if: !contains('return-portal', github.ref)
+        if: contains('return-portal', github.ref)
         run: echo "Build application ${{ github.ref }}."
 
 #      - name: Build return-portal
