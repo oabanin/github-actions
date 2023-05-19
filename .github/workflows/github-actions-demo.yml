@@ -18,10 +18,12 @@ jobs:
   test_job:
     runs-on: ubuntu-latest
     env:
-      IS_RETURN_PORTAL_TAG: contains(github.ref, 'frontend') == false
-      IS_FRONTEND_APP_TAG: contains(github.ref, 'return-portal') == false
+      IS_RETURN_PORTAL_TAG: {{ contains(github.ref, 'frontend') == false }}
+      IS_FRONTEND_APP_TAG: {{ contains(github.ref, 'return-portal') == false }}
     steps:
       - run: echo "${{ toJSON(github) }}"
+      - run: echo "${{IS_FRONTEND_APP_TAG}}"
+      - run: echo "${{IS_RETURN_PORTAL_TAG}}"
 
       - name: Build return-portal
         if: {{ $IS_RETURN_PORTAL_TAG }}
