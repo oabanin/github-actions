@@ -19,13 +19,25 @@ jobs:
       - run: echo "${{ toJSON(github) }}"
 
       - name: Build return-portal
-        if: contains('frontend', github.ref) == 'false'
+        if: contains(github.ref, 'frontend') == false
         run: echo "Build return-portal ${{ github.ref }}."
 
       - name: Build application
-        if: contains('return-portal', github.ref) == 'false'
+        if: contains(github.ref, 'return-portal') == false
         run: echo "Build application ${{ github.ref }}."
 
+
+      - name: test
+        if: contains('Hello world', 'llo') == false
+        run: echo "test"
+
+      - name: test1
+        if: contains('Hello world', 'llo') == true
+        run: echo "test1"
+
+      - name: test2
+        if: contains('Hello world', 'llo') == true
+        run: echo "test2"
 #      - name: Build return-portal
 #        if: github.ref != 'refs/tags/current-release-frontend' || github.ref == 'refs/tags/pre-release-frontend'
 #        run: echo "Build return-portal ${{ github.ref }}."
