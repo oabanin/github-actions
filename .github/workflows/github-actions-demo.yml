@@ -28,6 +28,10 @@ jobs:
 
       - name: create-invalidation
         run: |
+          aws cloudfront list-distributions
+
+      - name: create-invalidation
+        run: |
           IDS=$(aws cloudfront list-distributions  | jq -r ".DistributionList.Items[]  | select(.Origins.Items[].Id==\"${{env.S3_BUCKET_NAME}}.s3.eu-central-1.amazonaws.com\").Id")
           echo "${IDS}" | while IFS= read -r line; do aws cloudfront create-invalidation --distribution-id $line --paths "/*"; done
 
