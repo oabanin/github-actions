@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: ${{ github.event.head_commit.message }}
+run-name: ${{ github.event.head_commit.message }} (${{ github.event.base_ref }})
 on:
   push:
     tags:
@@ -9,6 +9,8 @@ on:
       - pre-release
       - pre-release-frontend
       - pre-release-return-portal
+    branches:
+      - develop
 
 jobs:
   test:
@@ -17,11 +19,11 @@ jobs:
       - run: echo "${{ toJSON(github) }}"
 
       - name: Build return-portal
-        if: ${{ github.ref != 'refs/tags/current-release-frontend' || github.ref == 'refs/tags/pre-release-frontend' }}
+        if: github.ref != 'refs/tags/current-release-frontend' || github.ref == 'refs/tags/pre-release-frontend'
         run: echo "Build return-portal ${{ github.ref }}."
 
       - name: Build application
-        if: ${{ github.ref != 'refs/tags/current-release-return-portal' || github.ref == 'refs/tags/pre-release-return-portal' }}
+        if: github.ref != 'refs/tags/current-release-return-portal' || github.ref == 'refs/tags/pre-release-return-portal'
         run: echo "Build application ${{ github.ref }}."
 
 #      - name: Build return-portal (Pre-release)
