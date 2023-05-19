@@ -19,7 +19,7 @@ jobs:
   test_job:
     runs-on: ubuntu-latest
     env:
-      AWS_ROLE_ARN_TO_ASSUME: "arn:aws:iam::316706084255:role/github-actions-oidc-dev",
+      AWS_ROLE_ARN_TO_ASSUME: "arn:aws:iam::316706084255:role/github-actions-oidc-dev"
       S3_BUCKET_NAME: "outvio-customer-dev"
 #      IS_RETURN_PORTAL_TAG: ${{ contains(github.ref, 'frontend') == false }}
 #      IS_FRONTEND_APP_TAG: ${{ contains(github.ref, 'return-portal') == false }}
