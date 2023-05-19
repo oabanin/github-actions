@@ -1,37 +1,38 @@
 name: GitHub Actions Demo
 run-name: ${{ github.event.head_commit.message }} (${{ github.event.base_ref }})
 on:
-  push:
-    tags:
-      - current-release
-      - current-release-frontend
-      - current-release-return-portal
-      - pre-release
-      - pre-release-frontend
-      - pre-release-return-portal
-    branches:
-      - develop
+  [push]
+#  push:
+#    tags:
+#      - current-release
+#      - current-release-frontend
+#      - current-release-return-portal
+#      - pre-release
+#      - pre-release-frontend
+#      - pre-release-return-portal
+#    branches:
+#      - develop
 
 
 
 jobs:
   test_job:
     runs-on: ubuntu-latest
-    env:
-      IS_RETURN_PORTAL_TAG: ${{ contains(github.ref, 'frontend') == false }}
-      IS_FRONTEND_APP_TAG: ${{ contains(github.ref, 'return-portal') == false }}
+#    env:
+#      IS_RETURN_PORTAL_TAG: ${{ contains(github.ref, 'frontend') == false }}
+#      IS_FRONTEND_APP_TAG: ${{ contains(github.ref, 'return-portal') == false }}
     steps:
-      - run: echo "${{ toJSON(github) }}"
-      - run: echo "124124 {{ $IS_FRONTEND_APP_TAG}}"
-      - run: echo "124124 {{ $IS_RETURN_PORTAL_TAG}}"
-
-      - name: Build return-portal
-        if: ${{ fromJSON(env.IS_RETURN_PORTAL_TAG) }}
-        run: echo "Build return-portal ${{ github.ref }}."
-
-      - name: Build application
-        if: ${{ fromJSON(env.IS_FRONTEND_APP_TAG) }}
-        run: echo "Build application ${{ github.ref }}."
+      - run: echo "${{ toJSON(secret) }}"
+#      - run: echo "124124 {{ $IS_FRONTEND_APP_TAG}}"
+#      - run: echo "124124 {{ $IS_RETURN_PORTAL_TAG}}"
+#
+#      - name: Build return-portal
+#        if: ${{ fromJSON(env.IS_RETURN_PORTAL_TAG) }}
+#        run: echo "Build return-portal ${{ github.ref }}."
+#
+#      - name: Build application
+#        if: ${{ fromJSON(env.IS_FRONTEND_APP_TAG) }}
+#        run: echo "Build application ${{ github.ref }}."
 
 #      - name: Build application
 #        if: $IS_FRONTEND_APP_TAG  == true
