@@ -12,13 +12,14 @@ on:
     branches:
       - develop
 
-env:
-  IS_RETURN_PORTAL_TAG: contains(github.ref, 'frontend') == false
-  IS_FRONTEND_APP_TAG: contains(github.ref, 'return-portal') == false
+
 
 jobs:
-  test:
+  test_job:
     runs-on: ubuntu-latest
+    env:
+      IS_RETURN_PORTAL_TAG: contains(github.ref, 'frontend') == false
+      IS_FRONTEND_APP_TAG: contains(github.ref, 'return-portal') == false
     steps:
       - run: echo "${{ toJSON(github) }}"
 
