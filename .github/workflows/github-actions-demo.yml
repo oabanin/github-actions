@@ -23,11 +23,11 @@ jobs:
       - run: echo "${{ toJSON(github) }}"
 
       - name: Build return-portal
-        if: $IS_RETURN_PORTAL_TAG
+        if: {{ $IS_RETURN_PORTAL_TAG }}
         run: echo "Build return-portal ${{ github.ref }}."
 
       - name: Build application
-        if: $IS_FRONTEND_APP_TAG
+        if: {{ $IS_FRONTEND_APP_TAG }}
         run: echo "Build application ${{ github.ref }}."
 
 
