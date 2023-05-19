@@ -26,7 +26,7 @@ jobs:
       - run: echo "124124 {{ $IS_RETURN_PORTAL_TAG}}"
 
       - name: Build return-portal
-        if: ${{ fromJSON($IS_RETURN_PORTAL_TAG) }}
+        if: ${{ fromJSON(env.IS_RETURN_PORTAL_TAG) }}
         run: echo "Build return-portal ${{ github.ref }}."
 
 #      - name: Build application
