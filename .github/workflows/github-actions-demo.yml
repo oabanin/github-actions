@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 #run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  test:
     runs-on: ubuntu-latest
     steps:
       - run: echo "github.workspace - ${{ github.workspace }} "
@@ -19,9 +19,9 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
       - name: Build return-portal
-        if: ${{ github.ref == 'pre-release-frontend' || github.ref == 'pre-release-return-portal' }}
+        if: ${{ github.ref == 'refs/tags/pre-release' || github.ref == 'refs/tags/pre-release-return-portal' }}
         run: echo " Build return-portal ${{ github.ref }}."
 
       - name: Build application
-        if: ${{ github.ref == 'pre-release-frontend' || github.ref == 'pre-release-frontend' }}
-        run: echo " RUN only if pre-release ${{ github.ref }}."
+        if: ${{ github.ref == 'refs/tags/pre-release' || github.ref == 'refs/tags/pre-release-frontend' }}
+        run: echo " Build app ${{ github.ref }}."
