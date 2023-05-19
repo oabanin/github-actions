@@ -1,27 +1,33 @@
 name: GitHub Actions Demo
-run-name: ${{ github.event.head_commit.message }} (${{ github.base_ref }})
+run-name: ${{ github.event.head_commit.message }}
 on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "github.workspace - ${{ github.workspace }} "
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "${{ toJSON(github) }}"
 
       - name: Build return-portal
-        if: ${{ github.ref == 'refs/tags/pre-release' || github.ref == 'refs/tags/pre-release-return-portal' }}
-        run: echo " Build return-portal ${{ github.ref }}."
+        if: ${{ github.ref != 'refs/tags/current-release-frontend' || github.ref == 'refs/tags/pre-release-frontend' }}
+        run: echo "Build return-portal ${{ github.ref }}."
 
       - name: Build application
-        if: ${{ github.ref == 'refs/tags/pre-release' || github.ref == 'refs/tags/pre-release-frontend' }}
-        run: echo " Build app ${{ github.ref }}."
+        if: ${{ github.ref != 'refs/tags/current-release-return-portal' || github.ref == 'refs/tags/pre-release-return-portal' }}
+        run: echo "Build application ${{ github.ref }}."
+
+#      - name: Build return-portal (Pre-release)
+#        if: ${{ github.ref == 'refs/tags/pre-release' || github.ref == 'refs/tags/pre-release-return-portal' }}
+#        run: echo " Build return-portal ${{ github.ref }}."
+#
+#      - name: Build application (Pre-release)
+#        if: ${{ github.ref == 'refs/tags/pre-release' || github.ref == 'refs/tags/pre-release-frontend' }}
+#        run: echo " Build app ${{ github.ref }}."
+#
+#      - name: Build return-portal (Pre-release)
+#        if: ${{ github.ref == 'refs/tags/pre-release' || github.ref == 'refs/tags/pre-release-return-portal' }}
+#        run: echo " Build return-portal ${{ github.ref }}."
+#
+#      - name: Build application (Release)
+#        if: ${{ github.ref == 'refs/tags/current-release' || github.ref == 'refs/tags/current-release-frontend' }}
+#        run: echo " Build app ${{ github.ref }}."
+
