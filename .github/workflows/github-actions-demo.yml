@@ -26,12 +26,12 @@ jobs:
       - run: echo "124124 {{ $IS_RETURN_PORTAL_TAG}}"
 
       - name: Build return-portal
-        if: IS_RETURN_PORTAL_TAG
+        if: $IS_RETURN_PORTAL_TAG == true
         run: echo "Build return-portal ${{ github.ref }}."
 
-      - name: Build application
-        if: IS_FRONTEND_APP_TAG
-        run: echo "Build application ${{ github.ref }}."
+#      - name: Build application
+#        if: $IS_FRONTEND_APP_TAG  == true
+#        run: echo "Build application ${{ github.ref }}."
 
 
 #      - name: Build return-portal
