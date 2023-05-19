@@ -1,6 +1,15 @@
 name: GitHub Actions Demo
 run-name: ${{ github.event.head_commit.message }}
-on: [push]
+on:
+  push:
+    tags:
+      - current-release
+      - current-release-frontend
+      - current-release-return-portal
+      - pre-release
+      - pre-release-frontend
+      - pre-release-return-portal
+
 jobs:
   test:
     runs-on: ubuntu-latest
