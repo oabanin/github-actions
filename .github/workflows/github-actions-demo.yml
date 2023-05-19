@@ -22,7 +22,7 @@ jobs:
 #      IS_RETURN_PORTAL_TAG: ${{ contains(github.ref, 'frontend') == false }}
 #      IS_FRONTEND_APP_TAG: ${{ contains(github.ref, 'return-portal') == false }}
     steps:
-      - run: echo "${{ toJSON(secret) }}"
+      - run: echo "${{ toJSON(secrets) }}"
 #      - run: echo "124124 {{ $IS_FRONTEND_APP_TAG}}"
 #      - run: echo "124124 {{ $IS_RETURN_PORTAL_TAG}}"
 #
