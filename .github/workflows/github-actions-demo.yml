@@ -30,7 +30,7 @@ jobs:
         run: echo "Build return-portal ${{ github.ref }}."
 
       - name: Build application
-        if: ${{ fromJSON(env.$IS_FRONTEND_APP_TAG) }}
+        if: ${{ fromJSON(env.IS_FRONTEND_APP_TAG) }}
         run: echo "Build application ${{ github.ref }}."
 
 #      - name: Build application
