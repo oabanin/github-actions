@@ -18,11 +18,19 @@ on:
 jobs:
   test_job:
     runs-on: ubuntu-latest
-#    env:
+    env:
+      AWS_ROLE_ARN_TO_ASSUME: "arn:aws:iam::316706084255:role/github-actions-oidc-dev",
+      S3_BUCKET_NAME: "outvio-customer-dev"
 #      IS_RETURN_PORTAL_TAG: ${{ contains(github.ref, 'frontend') == false }}
 #      IS_FRONTEND_APP_TAG: ${{ contains(github.ref, 'return-portal') == false }}
     steps:
       - run: echo "${{ toJSON(secrets) }}"
+
+      - name: create-invalidation
+        run: |
+          IDS=$(aws cloudfront list-distributions  | jq -r ".DistributionList.Items[]  | select(.Origins.Items[].Id==\"${{env.S3_BUCKET_NAME}}.s3.eu-central-1.amazonaws.com\").Id")
+          echo "${IDS}" | while IFS= read -r line; do aws cloudfront create-invalidation --distribution-id $line --paths "/*"; done
+
 #      - run: echo "124124 {{ $IS_FRONTEND_APP_TAG}}"
 #      - run: echo "124124 {{ $IS_RETURN_PORTAL_TAG}}"
 #
